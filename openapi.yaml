@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Ordenación de Productos
+  description: >-
+    API para ordenar productos según ventas y stock hecha por Alexandru Adrian
+    Boboc para Merlin Software
+  contact:
+    email: adrian.boboc4@hotmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /sort-products:
+    post:
+      summary: Ordena productos basándose en ventas y stock.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                salesWeight:
+                  type: number
+                  format: float
+                  description: Ponderacion para las ventas (entre 0 y 1)
+                stockWeight:
+                  type: number
+                  format: float
+                  description: Ponderación para el stock (entre 0 y 1).
+                productSales:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductSales'
+                productStock:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductStock'
+              required:
+                - salesWeight
+                - stockWeight
+                - productSales
+                - productStock
+      responses:
+        '200':
+          description: Lista ordenada de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    ProductSales:
+      type: object
+      properties:
+        productId:
+          type: string
+        sales:
+          type: number
+          format: float
+      required:
+        - productId
+        - sales
+    ProductStock:
+      type: object
+      properties:
+        productId:
+          type: string
+        stock:
+          type: integer
+      required:
+        - productId
+        - stock
