@@ -9,7 +9,7 @@ Este proyecto proporciona un endpoint para ordenar productos según las ventas r
 ## Ejecución
 
 1. Clona el repositorio.
-2. Ejecutar mediante el Bood Dashboard
+2. Ejecutar mediante el Boot Dashboard
 3. Realiza pruebas con **curl**:
 - La llamada a la API se hará al endpoint `/sort-products` y deberá ser mediante el método **POST**.
 - Esta llamada requerirá los siguientes parámetros:
